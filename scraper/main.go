@@ -19,13 +19,13 @@ func main() {
 		"http://google.com",
 		"https://globoesporte.globo.com/",
 	}
-	println(urlToProcess)
+	fmt.Println(urlToProcess)
 }
 
 func getTitle(html string) string {
 	r, _ := regexp.Compile("<title>(.*?)<\\/title>")
 	if title := r.FindStringSubmatch(html); len(title) > 0 {
-		return r.FindStringSubmatch(html)[1]
+		return title[1]
 	}
 	return "Sem titulo "
 }
