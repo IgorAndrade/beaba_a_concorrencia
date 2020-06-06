@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"net/http"
+	"regexp"
 	"time"
 )
 
@@ -19,7 +22,6 @@ func main() {
 		"http://globo.com",
 		"http://google.com",
 		"https://globoesporte.globo.com/",
-		"https://uxdesign.cc/learning-to-code-or-sort-of-will-make-you-a-better-product-designer-e76165bdfc2d",
 	}
 
 	ini := time.Now()
@@ -30,5 +32,24 @@ func main() {
 	for i := 0; i < 3; i++ {
 		fmt.Println(<-ch)
 	}
-	fmt.Println("(Took ", time.Since(ini).Seconds(), "secs)")
+	fmt.Println("(Took ", time.Since(ini).Milliseconds(), "Milliseconds)")
+}
+
+func getTitle(html string) string {
+	r, _ := regexp.Compile("<title>(.*?)<\\/title>")
+	if title := r.FindStringSubmatch(html); len(title) > 0 {
+		return r.FindStringSubmatch(html)[1]
+	}
+	return "Sem titulo "
+}
+
+func scrap(url string, ch chan Result) {
+	r := Result{}
+	fmt.Printf("try %s\n", url)
+	r.url = url
+
+	resp, _ := http.Get(url)
+	html, _ := ioutil.ReadAll(resp.Body)
+	r.title = getTitle(string(html))
+	ch <- r
 }
