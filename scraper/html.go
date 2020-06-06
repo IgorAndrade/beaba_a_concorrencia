@@ -8,6 +8,15 @@ import (
 	"golang.org/x/net/html"
 )
 
+type Result struct {
+	url   string
+	title string
+}
+
+func (r Result) String() string {
+	return fmt.Sprintf("URL: %s \nTitle: %s", r.url, r.title)
+}
+
 func hasClass(attribs []html.Attribute, className string) bool {
 	for _, attr := range attribs {
 		if attr.Key == "class" && strings.Contains(attr.Val, className) {
