@@ -14,6 +14,7 @@ type ferrari struct {
 
 func (f *ferrari) ligarTurbo() {
 	f.turboLigado = true
+	fmt.Println("dentro", f)
 }
 
 func main() {

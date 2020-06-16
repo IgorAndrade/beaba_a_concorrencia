@@ -33,11 +33,11 @@ func ponteiro() {
 	var p *int
 	p = &i // pegando o endereço da variável
 	fmt.Println(p, i, &i)
-	//fmt.Println(p, *p, i, &i)
+	fmt.Println(p, *p, i, &i)
 	// Go não tem aritmética de ponteiros
 	// p++
-	//	*p++ // desreferenciando (pegando o valor)
-	//i++
+	*p++ // desreferenciando (pegando o valor)
+	i++
 
 	fmt.Println(p, *p, i, &i)
 
