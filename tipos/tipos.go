@@ -25,14 +25,20 @@ func main() {
 	bo := true
 	fmt.Println("O tipo de bo é", reflect.TypeOf(bo))
 	fmt.Println(!bo)
+	ponteiro()
+}
 
-	var p *int = nil
+func ponteiro() {
+	i := 6
+	var p *int
 	p = &i // pegando o endereço da variável
-	*p++   // desreferenciando (pegando o valor)
-	i++
-
+	fmt.Println(p, i, &i)
+	//fmt.Println(p, *p, i, &i)
 	// Go não tem aritmética de ponteiros
 	// p++
+	//	*p++ // desreferenciando (pegando o valor)
+	//i++
 
 	fmt.Println(p, *p, i, &i)
+
 }
